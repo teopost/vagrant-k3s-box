@@ -83,6 +83,8 @@ helm repo add jetstack https://charts.jetstack.io
 helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
 helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
 helm repo update
+chown -R  vagrant:vagrant /home/vagrant/.config/helm/
+chown -R  vagrant:vagrant /home/vagrant/.cache/helm
 
 # Configure NFS
 mkdir -p /data
