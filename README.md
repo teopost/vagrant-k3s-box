@@ -59,9 +59,3 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-
-4. Run Virtual Machine
-
-vagrant up
-vagrant ssh
-kubectl get pod -A

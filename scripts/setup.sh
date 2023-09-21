@@ -50,8 +50,10 @@ kubectl get pods -A
 echo "*** Install k9s"
 wget https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz
 tar xvf k9s_Linux_amd64.tar.gz
-chmod 7777 ./k9s
+chmod 777 ./k9s
 mv ./k9s /usr/local/bin/
+echo "alias k9s='k9s --logFile /home/vagrant/k9s-root.log'" >> /home/vagrant/.profile
+
 sleep 10s
 
 # Setup cluster access for root user
@@ -62,10 +64,11 @@ grep -q KUBECONFIG /root/.profile || echo "export KUBECONFIG=/etc/rancher/k3s/k3
 
 # Setup cluster access for vagrant user
 echo "*** Setup cluster access for vagrant user @see https://rancher.com/docs/k3s/latest/en/cluster-access/"
-echo "alias k9s='k9s --logFile /home/vagrant/.k9s-vagrant.log'" >> /home/vagrant/.profile
 grep -q KUBECONFIG /home/vagrant/.profile || echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> /home/vagrant/.profile
 chown vagrant:vagrant /etc/rancher/k3s/k3s.yaml
+chmod 777 /etc/rancher/k3s/k3s.yaml
 chown vagrant:vagrant /home/vagrant/.profile
+
 
 # Install Helm
 echo "*** Install HELM3"
